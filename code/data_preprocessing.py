@@ -6,9 +6,11 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.manifold import TSNE
 
+from pathlib import Path as path
+
 # Parameters (can be changed according to experiment setting)
 
-BASE_DIR = os.getcwd() # The current working directory
+BASE_DIR = path(__file__).parent / path("..") # The current working directory
 input_path = os.path.join(BASE_DIR, 'data/Original_Data_Buchwald_Hartwig_HTE.csv') # Relative path
 output_path = os.path.join(BASE_DIR, 'data/Data_After_Preprocessing_Buchwald_Hartwig_HTE.csv')
 

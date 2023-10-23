@@ -11,8 +11,10 @@ from sklearn.linear_model import LinearRegression
 from sklearn.svm import SVR
 from sklearn.metrics import mean_absolute_error
 
-BASE_DIR = os.getcwd() # The current working directory
-input_path = os.path.join(BASE_DIR, 'data/Data_After_Preprocessing_Buchwald_Hartwig_HTE.csv') # Relative path
+from pathlib import Path as path
+
+BASE_DIR = path(__file__).parent / path("..") # The current working directory
+input_path = path(BASE_DIR, 'data/Data_After_Preprocessing_Buchwald_Hartwig_HTE.csv') # Relative path
 
 data = pd.read_csv(input_path) # Read the csv file with relative path
 reagent = 'additive_number'
@@ -185,8 +187,8 @@ yield_true = yield_true * std + mean
 rmse = np.sqrt(metrics.mean_squared_error(yield_predicted, yield_true))
 mae = mean_absolute_error(yield_predicted, yield_true)
 print(rmse)
-print(mae)'''
-
+print(mae)
+'''
 # GemNet
 '''https://drive.google.com/file/d/1K532m1gGivUBmLu6RUZ-GAQxPk6mbqKS/view?usp=sharing'''
 
@@ -284,8 +286,8 @@ def eval_all_baseline_DRFP(sample_num=5):
   print(mae)
   return rmse,r2,mae
 
-eval_all_baseline_drfp()'''
-
+eval_all_baseline_drfp()
+'''
 
 
 

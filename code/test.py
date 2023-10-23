@@ -11,9 +11,11 @@ import sys
 import time
 import numpy as np
 
-BASE_DIR = os.getcwd() # The current working directory
-input_path = os.path.join(BASE_DIR, 'data/Data_After_Preprocessing_Buchwald_Hartwig_HTE.csv') # Relative path
-model_path = os.path.join(BASE_DIR, 'model/model_trained.h5')
+from pathlib import Path as path
+
+BASE_DIR = path(__file__).parent / path("..") # The current working directory
+input_path = path(BASE_DIR, 'data/Data_After_Preprocessing_Buchwald_Hartwig_HTE.csv') # Relative path
+model_path = path(BASE_DIR, 'model/model_trained.h5')
 
 data_all = pd.read_csv(input_path) # Read the csv file with relative path
 reagent = 'additive_number'
@@ -119,7 +121,7 @@ def eval_ks_tune_num(model, data = data_all, num_steps=(0, 1, 2,3,4,5,6,7,8,9,10
     data_sampled_plot = data_used_plot.loc[top_k_idx].set_index(["index"])
 
     # batch used for training
-    data_minus = data_used.append(data_sampled).drop_duplicates(keep=False)
+    data_minus = data_used.append(data_sampled).drop_duplicates(keep=False) # TODO: change with pd.concat
 
     x_test = data_minus.iloc[:,0:feature_num].values
     y_test = data_minus[['yield']].values.flatten().tolist()
