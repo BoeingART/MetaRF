@@ -16,13 +16,14 @@ from tqdm import tqdm
 from pathlib import Path as path
 
 BASE_DIR = path(__file__).parent / path("..") # The current working directory
-input_path = path(BASE_DIR, 'data/Data_After_Preprocessing_Buchwald_Hartwig_HTE.csv') # Relative path
+input_path = path(BASE_DIR, 'data/ullmann-ma_reaction.csv') # Relative path
 output_path = path(BASE_DIR, 'model/model_trained.h5') 
 
 data_all = pd.read_csv(input_path) # Read the csv file with relative path
 reagent = 'additive_number'
 dft_num = 120 # Number of the original reaction encoding
 
+# NOTE: for divide reactions?
 list_train = [1,2,3,4]
 list_val = [5]
 list_test = [6,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
@@ -30,6 +31,7 @@ list_test = [6,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
 train_all = data_all[data_all[reagent].isin(list_train)].sample(frac=1)
 test_all = data_all[data_all[reagent].isin(list_test)]
 
+# NOTE: modified from Tensorflow
 class Model(keras.Model):
     def __init__(self):
         super().__init__()
